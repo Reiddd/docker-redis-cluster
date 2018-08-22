@@ -6,11 +6,12 @@ MAINTAINER Johan Andersson <Grokzen@gmail.com>
 ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g  /etc/apt/sources.list && apt-get update
+
 # Install system dependencies
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -yqq \
-      net-tools supervisor ruby rubygems locales gettext-base wget && \
-    apt-get clean -yqq
+RUN apt-get install --no-install-recommends -y \
+    net-tools supervisor ruby rubygems locales gettext-base wget && \
+    apt-get clean -y
 
 # # Ensure UTF-8 lang and locale
 RUN locale-gen en_US.UTF-8
@@ -20,6 +21,7 @@ ENV LC_ALL     en_US.UTF-8
 # Necessary for gem installs due to SHA1 being weak and old cert being revoked
 ENV SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
 
+RUN gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 RUN gem install redis -v 3.3.3
 
 RUN apt-get install -y gcc make g++ build-essential libc6-dev tcl git supervisor ruby
