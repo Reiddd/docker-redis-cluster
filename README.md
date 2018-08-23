@@ -1,10 +1,4 @@
 # docker-redis-cluster
-
-[![Docker Stars](https://img.shields.io/docker/stars/grokzen/redis-cluster.svg)](hub])
-[![Docker Pulls](https://img.shields.io/docker/pulls/grokzen/redis-cluster.svg)](hub])
-
-Docker hub: https://hub.docker.com/r/grokzen/redis-cluster/
-
 Docker image with redis built and installed from source.
 
 The main usage for this container is to test redis cluster code. For example in https://github.com/Grokzen/redis-py-cluster repo.
@@ -14,28 +8,6 @@ The cluster is 6 redis instances running with 3 master & 3 slaves, one slave for
 It also contains 2 standalone instances that is not part of the cluster. They are running on port 7006 & 7007
 
 This image requires at least `Docker` version 1.10 but the latest version is recommended.
-
-Update 2018-03-06: All images/tags on dockerhub has been rebuilt with the latest code and re-uploaded to dockerhub.
-
-
-# Note for Mac users
-
-If you are using this container to run a redis cluster on your mac computer, then you need to configure the container to use another IP address for cluster discovery as it can't use the default discovery IP that is hardcoded into the container.
-
-If you are using the docker-compose file to build the container, then you must export a envrionment variable on your machine before building the container.
-
-```
-# This will make redis do cluster discovery and bind all nodes to ip 127.0.0.1 internally
-
-export REDIS_CLUSTER_IP=0.0.0.0
-```
-
-If you are downloading the container from dockerhub, you must add the internal IP envrionment variable to your `docker run` command.
-
-```
-docker run grokzen/redis-cluster:latest -e "IP=0.0.0.0" ...
-```
-
 
 
 # Usage
@@ -93,7 +65,7 @@ For a release to be buildable it needs to be present at this url: http://downloa
 To set a different redis version use the argument --build-arg
 
     # Example
-    docker build --build-arg redis_version=3.2.0 -t grokzen/redis-cluster .
+    docker build --build-arg redis_version=3.2.0 -t reidddd/redis-cluster .
 
 
 ### docker-compose
