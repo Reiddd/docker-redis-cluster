@@ -3,10 +3,11 @@ services:
   redis-cluster:
     environment:
      IP: ${REDIS_CLUSTER_IP}
+     CLUSTER_ONLY: 'true'
     build:
       context: .
       args:
-        redis_version: '4.0.10'
+        redis_version: '4.0.11'
     hostname: server
     ports:
       - '7000-7007:7000-7007'
